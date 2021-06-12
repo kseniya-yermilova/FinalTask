@@ -34,4 +34,9 @@ public class BasePage {
         WebDriverWait wait = new WebDriverWait(driver, timeToWait);
         wait.until(ExpectedConditions.visibilityOf(element));
     }
+
+    public void scrollPageToElement(WebElement element){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView();", element);//прокрутка страницы до элемента
+    }
 }

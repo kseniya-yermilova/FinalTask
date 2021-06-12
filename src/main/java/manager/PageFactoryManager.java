@@ -1,10 +1,8 @@
 package manager;
 
+import io.cucumber.java.ro.Si;
 import org.openqa.selenium.WebDriver;
-import pages.HomePage;
-import pages.ProductPage;
-import pages.SearchResultsPage;
-import pages.ShoppingBagPage;
+import pages.*;
 
 public class PageFactoryManager {
     WebDriver driver;
@@ -15,6 +13,14 @@ public class PageFactoryManager {
 
     public HomePage getHomePage() {
         return new HomePage(driver);
+    }
+
+    public SignInPage getSignInPage() {
+        return new SignInPage(driver);
+    }
+
+    public ResetPasswordPage getResetPasswordPage() {
+        return new ResetPasswordPage(driver);
     }
 
     public ShoppingBagPage getShoppingBagPage() {
@@ -29,5 +35,11 @@ public class PageFactoryManager {
         return new ProductPage(driver);
     }
 
- //   public CheckoutPage getCheckoutPage() { return new CheckoutPage(driver); }
+    public ClothingTallPage getClothingTallPage() {
+        return new ClothingTallPage(driver);
+    }
+
+    public SaleSunglassesPage getSaleSunglassesPage() { return new SaleSunglassesPage(driver); }
+
+    //   public CheckoutPage getCheckoutPage() { return new CheckoutPage(driver); }
 }

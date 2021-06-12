@@ -16,3 +16,42 @@ Feature: Smoke
     Examples:
       | homePage              |
       | https://www.asos.com/ |
+
+  Scenario Outline: Check add product to cart
+    Given User opens '<homePage>' page
+    And User checks search field visibility
+    When User makes search by keyword '<keyword>'
+    And User clicks search button
+    And User clicks first product of search results
+    And User clicks add to bag button on product
+    And User checks that add to bag popup visible
+    Then User clicks main page button
+    And User checks that amount of products in shopping bag are '<amountOfProducts>'
+
+    Examples:
+      | homePage              | keyword |amountOfProducts|
+      | https://www.asos.com/ | hat     |1               |
+
+  Scenario Outline: Check correct of product names
+    Given User opens '<homePage>' page
+    And User clicks Women button
+    And User moves to Clothing button
+    And User checks Clothing pop up visibility
+    When User clicks Tall button
+    Then User checks that names of product contains word '<keyword>'
+
+    Examples:
+      | homePage              |keyword|
+      | https://www.asos.com/ |tall   |
+
+  Scenario Outline: Check sale products
+    Given User opens '<homePage>' page
+    And User clicks Men button
+    And User moves to Sale button
+    And User checks Sale pop up visibility
+    When User clicks Sale sunglasses button
+    Then User checks sale products have saleIcon
+
+    Examples:
+      | homePage              |
+      | https://www.asos.com/ |
