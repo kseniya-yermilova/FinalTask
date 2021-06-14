@@ -1,6 +1,5 @@
 package manager;
 
-import io.cucumber.java.ro.Si;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
@@ -35,11 +34,11 @@ public class PageFactoryManager {
         return new ProductPage(driver);
     }
 
-    public ClothingTallPage getClothingTallPage() {
-        return new ClothingTallPage(driver);
+    public ClothingMaternityPage getClothingTallPage() {
+        return new ClothingMaternityPage(driver);
     }
 
     public SaleSunglassesPage getSaleSunglassesPage() { return new SaleSunglassesPage(driver); }
 
-    //   public CheckoutPage getCheckoutPage() { return new CheckoutPage(driver); }
+    public SavedItemsPage getSavedItemsPage(){ return new SavedItemsPage(driver);}
 }

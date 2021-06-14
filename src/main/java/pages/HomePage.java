@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
-public class HomePage extends BasePage{
+public class HomePage extends BasePage {
 
     @FindBy(xpath = "//div[@class='_25fsaDO _2zC79ar']")
     private WebElement header;
@@ -46,8 +46,8 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//div[@id='96b432e3-d374-4293-8145-b00772447cde']")
     private WebElement clothingPopUp;
 
-    @FindBy(xpath = "//*[@id=\"96b432e3-d374-4293-8145-b00772447cde\"]//a[contains(@href,'tall')]//div[@class='v0bHlCs']")
-    private WebElement tallButton;
+    @FindBy(xpath = "//*[@id='96b432e3-d374-4293-8145-b00772447cde']//div[@title='Maternity']")
+    private WebElement maternityButton;
 
     @FindBy(xpath = "//nav[@class='_3EAPxMS']//span[text()='Sale']")
     private WebElement saleButton;
@@ -55,52 +55,54 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//div[@id='c223e1a9-dc0f-42f5-afca-5cf5988c716b']")
     private WebElement salePopUp;
 
-    @FindBy(xpath = "//*[@id=\"c223e1a9-dc0f-42f5-afca-5cf5988c716b\"]//a[text()='SALE Sunglasses']")
+    @FindBy(xpath = "//div[@id='c223e1a9-dc0f-42f5-afca-5cf5988c716b']//a[text()='SALE Sunglasses']")
     private WebElement saleSunglassesButton;
 
-    public HomePage(WebDriver driver) {super(driver);}
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
 
     public void openHomePage(String url) {
         driver.get(url);
     }
 
-    public boolean isHeaderVisible(){
+    public boolean isHeaderVisible() {
         return header.isDisplayed();
     }
 
-    public boolean isFooterVisible(){
+    public boolean isFooterVisible() {
         return footer.isDisplayed();
     }
 
-    public boolean isSearchFieldVisible(){
+    public boolean isSearchFieldVisible() {
         return searchField.isDisplayed();
     }
 
-    public boolean isSignInButtonVisible(){
+    public boolean isSignInButtonVisible() {
         return signInButton.isDisplayed();
     }
 
-    public void clickSignInButton(){
+    public void clickSignInButton() {
         signInButton.click();
     }
 
-    public boolean isShoppingBagButtonVisible(){
+    public boolean isShoppingBagButtonVisible() {
         return shoppingBagButton.isDisplayed();
     }
 
-    public void clickShoppingBagButton(){
+    public void clickShoppingBagButton() {
         shoppingBagButton.click();
     }
 
-    public WebElement getSignInPopUp(){
+    public WebElement getSignInPopUp() {
         return signInPopUp;
     }
 
-    public boolean isSignInPopUpVisible(){
+    public boolean isSignInPopUpVisible() {
         return signInPopUp.isDisplayed();
     }
 
-    public void clickSignInButtonAtPopUp(){
+    public void clickSignInButtonAtPopUp() {
         signInButtonAtPopUp.click();
     }
 
@@ -109,53 +111,57 @@ public class HomePage extends BasePage{
         searchField.sendKeys(searchText);
     }
 
-    public void clickSearchButton(){
+    public void clickSearchButton() {
         searchButton.click();
     }
 
-    public String getAmountOfProductsInShoppingBag(){
+    public String getAmountOfProductsInShoppingBag() {
         return shoppingBagProductsCount.getText();
     }
 
-    public void clickWomenButton(){
+    public void clickWomenButton() {
         womenButton.click();
     }
 
-    public void moveToClothingButton(){
+    public void moveToClothingButton() {
         Actions actions = new Actions(driver);
         actions.moveToElement(clothingButton).build().perform();
     }
 
-    public boolean isClothingPopupVisible(){
+    public boolean isClothingPopupVisible() {
         return clothingPopUp.isDisplayed();
     }
 
-    public WebElement getClothingPopUp(){
+    public WebElement getClothingPopUp() {
         return clothingPopUp;
     }
 
-    public void clickTallButton(){
-        tallButton.click();
+    public void clickMaternityButton() {
+        maternityButton.click();
     }
 
-    public void clickMenButton(){
+    public void clickMenButton() {
         menButton.click();
     }
 
-    public void moveToSaleButton(){
+    public void moveToSaleButton() {
         Actions actions = new Actions(driver);
         actions.moveToElement(saleButton).build().perform();
     }
 
-    public boolean isSalePopUpVisible(){
+    public boolean isSalePopUpVisible() {
         return salePopUp.isDisplayed();
     }
 
-    public WebElement getSalePopUp(){
+    public WebElement getSalePopUp() {
         return salePopUp;
     }
 
-    public void clickSaleSunglassesButton(){
+    public void clickSaleSunglassesButton() {
         saleSunglassesButton.click();
+    }
+
+    public WebElement getSaleSunglassesButton() {
+        return saleSunglassesButton;
     }
 }

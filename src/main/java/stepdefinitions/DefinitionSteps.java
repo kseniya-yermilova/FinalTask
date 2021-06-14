@@ -27,10 +27,10 @@ public class DefinitionSteps {
     ResetPasswordPage resetPasswordPage;
     SearchResultsPage searchResultsPage;
     ProductPage productPage;
-    ClothingTallPage clothingTallPage;
-    //   CheckoutPage checkoutPage;
+    ClothingMaternityPage clothingMaternityPage;
     PageFactoryManager pageFactoryManager;
     SaleSunglassesPage saleSunglassesPage;
+    SavedItemsPage savedItemsPage;
 
     @Before
     public void testsSetUp() {
@@ -88,6 +88,8 @@ public class DefinitionSteps {
 
     @Then("User checks empty bag title visibility")
     public void checkShoppingBagTitleVisibility() {
+        shoppingBagPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        shoppingBagPage.scrollPageToElement(shoppingBagPage.getEmptyBagTitle());
         Assert.assertTrue(shoppingBagPage.isEmptyBagTitleVisible());
     }
 
@@ -216,19 +218,19 @@ public class DefinitionSteps {
         Assert.assertTrue(homePage.isClothingPopupVisible());
     }
 
-    @When("User clicks Tall button")
-    public void clickTallButton() {
-        homePage.clickTallButton();
-        clothingTallPage = pageFactoryManager.getClothingTallPage();
-        clothingTallPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+    @When("User clicks Maternity button")
+    public void clickMaternityButton() {
+        homePage.clickMaternityButton();
+        clothingMaternityPage = pageFactoryManager.getClothingTallPage();
+        clothingMaternityPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
     }
 
 
     @Then("User checks that names of product contains word {string}")
     public void checkThatNamesOfProductContainsKeyword(String keyword) {
-        clothingTallPage.waitForAjaxToComplete(DEFAULT_TIMEOUT);
-        for (WebElement webElement : clothingTallPage.getTallProducts()) {
-            clothingTallPage.scrollPageToElement(webElement);
+        clothingMaternityPage.waitForAjaxToComplete(DEFAULT_TIMEOUT);
+        for (WebElement webElement : clothingMaternityPage.getTallProducts()) {
+            clothingMaternityPage.scrollPageToElement(webElement);
             Assert.assertTrue(webElement.getText().toLowerCase(Locale.ROOT).contains(keyword));
         }
     }
@@ -242,7 +244,9 @@ public class DefinitionSteps {
     @And("User moves to Sale button")
     public void clickSaleButton() {
         homePage.moveToSaleButton();
+        homePage.waitForAjaxToComplete(DEFAULT_TIMEOUT);
         homePage.waitVisibilityOfElement(DEFAULT_TIMEOUT, homePage.getSalePopUp());
+        homePage.waitVisibilityOfElement(DEFAULT_TIMEOUT, homePage.getSaleSunglassesButton());
     }
 
     @And("User checks Sale pop up visibility")
@@ -260,5 +264,100 @@ public class DefinitionSteps {
     @Then("User checks sale products have saleIcon")
     public void checkSaleProductsHaveSaleIcon() {
         saleSunglassesPage.checkSaleProductListHasSaleIcon();
+    }
+
+    @And("User clicks sort button")
+    public void clickSortButton() {
+        saleSunglassesPage.clickSortButton();
+    }
+
+    @And("User checks Sort pop up visibility")
+    public void checkSortPopUpVisibility() {
+        Assert.assertTrue(saleSunglassesPage.isSortPopUpVisible());
+    }
+
+    @And("User clicks sort price low to high")
+    public void clickSortPriceLowToHigh() {
+        saleSunglassesPage.selectSort();
+        saleSunglassesPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        saleSunglassesPage.waitForAjaxToComplete(DEFAULT_TIMEOUT);
+        saleSunglassesPage.waitForAjaxToCompletePdp(DEFAULT_TIMEOUT);
+    }
+
+    @Then("User checks that sort is correct")
+    public void checkThatSortIsCorrect() {
+        searchResultsPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        Assert.assertTrue(searchResultsPage.isPriceSort());
+    }
+
+    @Then("User checks product price visibility")
+    public void checksProductPriceVisibility() {
+        Assert.assertTrue(productPage.isProductPriceVisible());
+    }
+
+    @And("User clicks Show more button")
+    public void clickShowMoreButton() {
+        productPage.scrollPageToElement(productPage.getShowMoreButton());
+        productPage.clickShowMoreButton();
+    }
+
+    @And("User checks Product details visibility")
+    public void checkProductDetailsVisibility() {
+        Assert.assertTrue(productPage.isProductDetailsVisible());
+    }
+
+    @And("User checks Product code visibility")
+    public void checkProductCodeVisibility() {
+        Assert.assertTrue(productPage.isProductCodeVisible());
+    }
+
+    @And("User checks Brand visibility")
+    public void checkBrandVisibility() {
+        Assert.assertTrue(productPage.isBrandVisible());
+    }
+
+    @And("User checks Look after visibility")
+    public void checkLookAfterVisibility() {
+        Assert.assertTrue(productPage.isLookAfterMeVisible());
+    }
+
+    @And("User checks About product visibility")
+    public void checkAboutProductVisibility() {
+        Assert.assertTrue(productPage.isAboutVisible());
+    }
+
+    @And("User clicks Save button on fourth product")
+    public void clickSaveButtonOnFourthProduct() {
+        searchResultsPage.scrollPageToElement(searchResultsPage.getSaveButtonOnFourthProduct());
+        searchResultsPage.clickSaveButtonOnFourthProduct();
+    }
+
+    @And("User clicks Saved items button")
+    public void clickSavedItemsButton() {
+        searchResultsPage.scrollPageToElement(searchResultsPage.getSavedItemsButton());
+        searchResultsPage.clickSavedItemsButton();
+        savedItemsPage = pageFactoryManager.getSavedItemsPage();
+        savedItemsPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        savedItemsPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, savedItemsPage.getAmountOfItems());
+    }
+
+    @Then("User checks that amount of saved items are {string}")
+    public void checkAmountOfSavedItems(String expectedAmount) {
+        Assert.assertEquals(savedItemsPage.getAmountOfSavedItems(), expectedAmount);
+    }
+
+    @And("User clicks Sort drop-down list")
+    public void clickSortDropDownList() {
+        searchResultsPage.clickSortDropdownList();
+        searchResultsPage.waitVisibilityOfElement(DEFAULT_TIMEOUT, searchResultsPage.getSortPopUp());
+    }
+
+    @And("User clicks Sort low to high button")
+    public void clickSortLowToHighButton() {
+        searchResultsPage.clickSortLowToHighButton();
+        searchResultsPage.waitForPageLoadComplete(DEFAULT_TIMEOUT);
+        searchResultsPage.waitForAjaxToComplete(DEFAULT_TIMEOUT);
+        searchResultsPage.waitVisibilityOfElement(DEFAULT_TIMEOUT,searchResultsPage.getProducts());
+        searchResultsPage.waitForAjaxToCompletePdp(DEFAULT_TIMEOUT);
     }
 }

@@ -29,20 +29,20 @@ Feature: Smoke
     And User checks that amount of products in shopping bag are '<amountOfProducts>'
 
     Examples:
-      | homePage              | keyword |amountOfProducts|
-      | https://www.asos.com/ | hat     |1               |
+      | homePage              | keyword | amountOfProducts |
+      | https://www.asos.com/ | hat     | 1                |
 
   Scenario Outline: Check correct of product names
     Given User opens '<homePage>' page
     And User clicks Women button
     And User moves to Clothing button
     And User checks Clothing pop up visibility
-    When User clicks Tall button
+    When User clicks Maternity button
     Then User checks that names of product contains word '<keyword>'
 
     Examples:
-      | homePage              |keyword|
-      | https://www.asos.com/ |tall   |
+      | homePage              | keyword   |
+      | https://www.asos.com/ | maternity |
 
   Scenario Outline: Check sale products
     Given User opens '<homePage>' page
@@ -55,3 +55,44 @@ Feature: Smoke
     Examples:
       | homePage              |
       | https://www.asos.com/ |
+
+  Scenario Outline: Check main product functionality
+    Given User opens '<homePage>' page
+    When User makes search by keyword '<keyword>'
+    And User clicks search button
+    And User clicks first product of search results
+    Then User checks product price visibility
+    And User clicks Show more button
+    And User checks Product details visibility
+    And User checks Product code visibility
+    And User checks Brand visibility
+    And User checks Look after visibility
+    And User checks About product visibility
+
+    Examples:
+      | homePage              | keyword |
+      | https://www.asos.com/ | hat     |
+
+  Scenario Outline: Check save button
+    Given User opens '<homePage>' page
+    When User makes search by keyword '<keyword>'
+    And User clicks search button
+    And User clicks Save button on fourth product
+    And User clicks Saved items button
+    Then User checks that amount of saved items are '<amountOfSavedItems>'
+
+    Examples:
+      | homePage              | keyword | amountOfSavedItems |
+      | https://www.asos.com/ | hat     | 1 item             |
+
+  Scenario Outline: Check sort
+    Given User opens '<homePage>' page
+    When User makes search by keyword '<keyword>'
+    And User clicks search button
+    And User clicks Sort drop-down list
+    And User clicks Sort low to high button
+    Then User checks that sort is correct
+
+    Examples:
+      | homePage              |keyword|
+      | https://www.asos.com/ |dress  |

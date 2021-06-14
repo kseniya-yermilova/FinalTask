@@ -6,16 +6,17 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public class ClothingTallPage extends BasePage{
+public class ClothingMaternityPage extends BasePage {
 
     @FindBy(xpath = "//div[@class='_3J74XsK']//p")
     private List<WebElement> tallProducts;
 
-    public ClothingTallPage(WebDriver driver){
+    public ClothingMaternityPage(WebDriver driver) {
         super(driver);
     }
 
-    public List<WebElement> getTallProducts(){
+    public List<WebElement> getTallProducts() {
         return tallProducts;
     }
+
 }

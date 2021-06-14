@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class SignInPage extends BasePage{
+public class SignInPage extends BasePage {
 
     @FindBy(xpath = "//input[@name='Username']")
     private WebElement emailField;
@@ -24,37 +24,39 @@ public class SignInPage extends BasePage{
     @FindBy(xpath = "//a[@class='qa-forgot-password adobeTrackedButton']")
     private WebElement forgotPasswordButton;
 
-    public SignInPage(WebDriver driver) {super(driver);}
+    public SignInPage(WebDriver driver) {
+        super(driver);
+    }
 
-    public boolean isEmailFieldVisible(){
+    public boolean isEmailFieldVisible() {
         return emailField.isDisplayed();
     }
 
-    public boolean isPasswordFieldVisible(){
+    public boolean isPasswordFieldVisible() {
         return passwordField.isDisplayed();
     }
 
-    public void enterEmail(String email){
+    public void enterEmail(String email) {
         emailField.sendKeys(email);
     }
 
-    public void clickSignInButton(){
+    public void clickSignInButton() {
         signInButton.click();
     }
 
-    public boolean isEmailErrorVisible(){
+    public boolean isEmailErrorVisible() {
         return emailError.isDisplayed();
     }
 
-    public boolean isPasswordErrorVisible(){
+    public boolean isPasswordErrorVisible() {
         return passwordError.isDisplayed();
     }
 
-    public boolean isForgotPasswordVisible(){
+    public boolean isForgotPasswordVisible() {
         return forgotPasswordButton.isDisplayed();
     }
 
-    public void clickForgotPasswordButton(){
+    public void clickForgotPasswordButton() {
         forgotPasswordButton.click();
     }
 }
