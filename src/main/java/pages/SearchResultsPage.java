@@ -73,12 +73,12 @@ public class SearchResultsPage extends BasePage {
         for (WebElement element: priceList) {
             scrollPageToElement(element);
             price[i]=Double.parseDouble(element.getText().substring(1));
-           // System.out.println(price[i]);
             i++;
         }
         for(i=0;i< priceList.size()-1;i++){
             if(price[i]<price[i+1])
                 result = true;
+            else result = false;
         }
         return result;
     }
